@@ -54,3 +54,35 @@ footer p {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+.note-input{
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 20px;
+  width: 240px;
+  margin: auto;
+
+}
+.note-input input{
+  border: none;
+  margin: 2%;
+}
+::placeholder {
+  color: #515151;
+  font-size: 1.2em;
+}
+*:focus {
+  outline-style: none;
+}
+.note-container{
+  margin-top: 10px;
+}
+.note-input button{
+  padding: 5px 10px 5px 10px;
+  background-color: #f5ba13;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  float: right;
+}
