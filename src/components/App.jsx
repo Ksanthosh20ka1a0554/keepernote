@@ -1,39 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
-import notes from "../notes";
 import NoteInput from "./Noteinput";
-import run from "../db"
 
-run().catch(console.error());
+function App() {
+  const [notes, setNotes] = useState([]);
 
-function createNote(notes){
-    return(
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
+  function fetchNotes() {
+    fetch("http://localhost:8000/data")
+      .then((response) => response.json())
+      .then((data) => {
+        setNotes(data.notes);
+      })
+      .catch((error) => {
+        console.error("Error fetching notes:", error);
+      });
+  }
+
+  function addNoteToState(newNote) {
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+    window.location.reload(); // Refresh the page
+  }
+
+  return (
+    <div>
+      <Header />
+      <NoteInput addNoteToState={addNoteToState} fetchNotes={fetchNotes} />
+      {notes.map((note) => (
         <Note
-            key={notes.key}
-            title={notes.title}
-            content={notes.content}
+          key={note._id}
+          title={note.title}
+          content={note.description}
         />
-    );
-}
-
-function App(){
-    return(
-        <div>
-            <Header/>
-            <NoteInput/>
-            {/*notes.map(createNote)*/}
-            {notes.map(noteItem => 
-                <Note
-                    key={noteItem.key}
-                    title={noteItem.title}
-                    content={noteItem.content}
-                />)
-        }  
-            <Footer/>
-        </div>
-    );
+      ))}
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

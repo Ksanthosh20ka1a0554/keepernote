@@ -1,54 +1,57 @@
 import React, { useState } from "react";
-import notes from "../notes";
-import Note from "./Note";
 
-function NoteInput() {
+function NoteInput({ addNoteToState }) {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [noteList, setNoteList] = useState(notes);
+  const [description, setDescription] = useState("");
 
   function addItem() {
     const newNote = {
-      key: Date.now(),
       title: title,
-      content: content,
+      description: description,
     };
 
-    setNoteList((prevNoteList) => [...prevNoteList, newNote]);
+    fetch("http://localhost:8000/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newNote),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Note added:", data);
+        addNoteToState(data.note);
+      })
+      .catch((error) => {
+        console.error("Error adding note:", error);
+      });
 
     setTitle("");
-    setContent("");
-  }
-
-  function handleDelete(key) {
-    setNoteList((prevNoteList) => prevNoteList.filter((note) => note.key !== key));
+    setDescription("");
   }
 
   return (
-    
-      <div className="note-container">
-        <div className="note-input">
-          <input
-            id="notetitle"
-            className="title"
-            type="text"
-            placeholder="Enter title..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-          <input
-            id="notedes"
-            className="des"
-            type="text"
-            placeholder="Enter Description..."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></input>
-          <button onClick={addItem}>Add</button>
-        </div>
+    <div className="note-container">
+      <div className="note-input">
+        <input
+          id="notetitle"
+          className="title"
+          type="text"
+          placeholder="Enter title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        ></input>
+        <input
+          id="notedes"
+          className="des"
+          type="text"
+          placeholder="Enter Description..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></input>
+        <button onClick={addItem}>Add</button>
       </div>
-     
-    
+    </div>
   );
 }
 

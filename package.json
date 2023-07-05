@@ -8,7 +8,6 @@
     "export": "^0.1.337",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1",
-    "prisma": "^4.16.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-scripts": "^1.1.5",
