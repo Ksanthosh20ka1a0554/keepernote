@@ -54,7 +54,14 @@ footer p {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-
+.note button{
+  padding: 5px 10px 5px 10px;
+  background-color: #f5ba13;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  float: right;
+}
 .note-input{
   background: #fff;
   border-radius: 7px;

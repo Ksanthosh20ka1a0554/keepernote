@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -41,8 +42,8 @@ mongoose
 
     // Add a new note
     app.post('/data', async (req, res) => {
-      const { title, description } = req.body;
-      const newNote = new NoteModel({ title, description });
+      const { title, description,id } = req.body;
+      const newNote = new NoteModel({ title, description,id });
 
       try {
         const savedNote = await newNote.save();
@@ -54,8 +55,28 @@ mongoose
       }
     });
 
+    // Delete a note
+app.delete('/data/:id', async (req, res) => {
+  const noteId = req.params.id;
+
+  try {
+    const deletedNote = await NoteModel.deleteOne({ _id: noteId });
+    if (deletedNote.deletedCount > 0) {
+      console.log('Note deleted successfully:', deletedNote);
+      res.json({ message: 'Note deleted successfully' });
+    } else {
+      console.error('Note not found');
+      res.status(404).json({ error: 'Note not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting note:', error);
+    res.status(500).json({ error: 'Failed to delete note' });
+  }
+});
+
+
     // Start the server
-    app.listen(8000, () => {
+    app.listen(port, () => {
       console.log('Server is running on port 8000.');
     });
   })

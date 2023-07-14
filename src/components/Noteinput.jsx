@@ -7,10 +7,10 @@ function NoteInput({ addNoteToState }) {
   function addItem() {
     const newNote = {
       title: title,
-      description: description,
+      description: description
     };
 
-    fetch("http://localhost:8000/data", {
+    fetch("http://localhost:8080/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ function NoteInput({ addNoteToState }) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Note added:", data);
-        addNoteToState(data.note);
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error adding note:", error);

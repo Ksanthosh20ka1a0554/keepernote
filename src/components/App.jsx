@@ -6,38 +6,60 @@ import NoteInput from "./Noteinput";
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
   function fetchNotes() {
-    fetch("http://localhost:8000/data")
+    fetch("http://localhost:8080/data")
       .then((response) => response.json())
       .then((data) => {
         setNotes(data.notes);
+        setError(null);
       })
       .catch((error) => {
         console.error("Error fetching notes:", error);
+        setError("Failed to fetch notes");
       });
   }
 
   function addNoteToState(newNote) {
     setNotes((prevNotes) => [...prevNotes, newNote]);
-    window.location.reload(); // Refresh the page
+  }
+
+  function handleNoteDelete(noteId) {
+    fetch(`http://localhost:8080/data/${noteId}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Note deleted successfully");
+        fetchNotes(); // Refresh the notes after deletion
+      })
+      .catch((error) => {
+        console.error("Error deleting note:", error);
+      });
   }
 
   return (
     <div>
       <Header />
       <NoteInput addNoteToState={addNoteToState} fetchNotes={fetchNotes} />
-      {notes.map((note) => (
-        <Note
-          key={note._id}
-          title={note.title}
-          content={note.description}
-        />
-      ))}
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        notes.map((note) => (
+          <Note
+            key={note._id}
+            id={note._id}
+            title={note.title}
+            content={note.description}
+            onDelete={() => handleNoteDelete(note._id)}
+          />
+        ))
+      )}
       <Footer />
     </div>
   );
