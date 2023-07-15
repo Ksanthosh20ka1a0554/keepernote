@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 7000;
 
 const app = express();
 
@@ -77,7 +77,7 @@ app.delete('/data/:id', async (req, res) => {
 
     // Start the server
     app.listen(port, () => {
-      console.log('Server is running on port 8000.');
+      console.log('Server is running on port 7000.');
     });
   })
   .catch((error) => {

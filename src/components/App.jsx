@@ -3,6 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import NoteInput from "./Noteinput";
+import Login from "./Login";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -13,7 +14,7 @@ function App() {
   }, []);
 
   function fetchNotes() {
-    fetch("http://localhost:8080/data")
+    fetch("http://localhost:7000/data")
       .then((response) => response.json())
       .then((data) => {
         setNotes(data.notes);
@@ -30,7 +31,7 @@ function App() {
   }
 
   function handleNoteDelete(noteId) {
-    fetch(`http://localhost:8080/data/${noteId}`, {
+    fetch(`http://localhost:7000/data/${noteId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -60,6 +61,7 @@ function App() {
           />
         ))
       )}
+      <Login/>
       <Footer />
     </div>
   );

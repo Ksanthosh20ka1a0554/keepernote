@@ -10,7 +10,7 @@ function NoteInput({ addNoteToState }) {
       description: description
     };
 
-    fetch("http://localhost:8080/data", {
+    fetch("http://localhost:7000/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
