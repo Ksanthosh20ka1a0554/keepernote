@@ -2,7 +2,7 @@ import React from "react";
 
 function Note(props) {
   function handleDelete() {
-    fetch(`http://localhost:7000/data/${props.id}`, {
+    fetch(`https://keepernote-server.onrender.com/data/${props.id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

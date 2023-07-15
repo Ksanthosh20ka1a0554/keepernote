@@ -10,7 +10,7 @@ function NoteInput({ addNoteToState }) {
       description: description
     };
 
-    fetch("http://localhost:7000/data", {
+    fetch("https://keepernote-server.onrender.com/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

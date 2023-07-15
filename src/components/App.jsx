@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   function fetchNotes() {
-    fetch("http://localhost:7000/data")
+    fetch("https://keepernote-server.onrender.com/data")
       .then((response) => response.json())
       .then((data) => {
         setNotes(data.notes);
@@ -31,7 +31,7 @@ function App() {
   }
 
   function handleNoteDelete(noteId) {
-    fetch(`http://localhost:7000/data/${noteId}`, {
+    fetch(`https://keepernote-server.onrender.com/data/${noteId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
