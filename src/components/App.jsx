@@ -4,9 +4,12 @@ import Footer from "./Footer";
 import Note from "./Note";
 import NoteInput from "./Noteinput";
 import Login from "./Login";
+import RotatingLines from "react-loader-spinner";
+
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -14,14 +17,17 @@ function App() {
   }, []);
 
   function fetchNotes() {
+    setLoading(true);
     fetch("https://keepernote-server.onrender.com/data")
       .then((response) => response.json())
       .then((data) => {
         setNotes(data.notes);
+        setLoading(false);
         setError(null);
       })
       .catch((error) => {
         console.error("Error fetching notes:", error);
+        setLoading(false);
         setError("Failed to fetch notes");
       });
   }
@@ -48,7 +54,12 @@ function App() {
     <div>
       <Header />
       <NoteInput addNoteToState={addNoteToState} fetchNotes={fetchNotes} />
-      {error ? (
+      {loading ? (
+        <div className="spinner-container">
+      <div className="loading-spinner">
+      </div>
+    </div>
+      ) : error ? (
         <p>{error}</p>
       ) : (
         notes.map((note) => (
@@ -61,7 +72,7 @@ function App() {
           />
         ))
       )}
-      <Login/>
+      {/* <Login /> */}
       <Footer />
     </div>
   );
