@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BounceLoader } from 'react-spinners';
 import axios from "axios";
 
 function NoteContainer() {
@@ -81,7 +82,7 @@ function NoteContainer() {
       </div>
 
       {loading ? (
-        <div>Loading notes...</div>
+        <BounceLoader color="#f5ba13" />
       ) : error ? (
         <div>Error: {error}</div>
       ) : (

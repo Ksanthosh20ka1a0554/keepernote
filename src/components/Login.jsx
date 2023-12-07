@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { BounceLoader } from 'react-spinners';
 import axios from "axios";
 
 function Login() {
@@ -7,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   function handleEmailChange(event) {
     setEmail(event.target.value);
   }
@@ -18,7 +19,7 @@ function Login() {
 
   function handleLogin(event) {
     event.preventDefault();
-
+    setLoading(true);
     // Send login request to the server
     axios
       .post("https://keepernote-server.onrender.com/login", { email, password })
@@ -30,6 +31,10 @@ function Login() {
       .catch((error) => {
         console.error("Error logging in:", error.response.data);
         setError(error.response.data.error);
+      })
+      .finally(() => {
+        // Set loading to false after request is complete
+        setLoading(false);
       });
   }
 
@@ -55,6 +60,17 @@ function Login() {
             required
           />
         </div>
+        {loading && 
+        <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+        >
+          <BounceLoader color="#f5ba13" cssOverride={{}} size={500} />
+        </div>}
         {error && <p className="error">{error}</p>}
         <button className="log-out" type="submit">Login</button>
         <p>

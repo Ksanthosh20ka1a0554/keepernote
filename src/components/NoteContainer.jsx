@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { BounceLoader } from 'react-spinners';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -73,7 +74,7 @@ function NoteContainer() {
   return (
     <div>
     <div className="top">
-    <h1>Welcome, {email}!</h1>
+    <h1>Welcome, {email.split('@')[0]}!</h1>
     <button className="log-out" onClick={handleLogout}>Logout</button>
     </div>
       <div className="note-input">
@@ -95,7 +96,7 @@ function NoteContainer() {
       </div>
 
       {loading ? (
-        <div>Loading notes...</div>
+        <BounceLoader color="#f5ba13" />
       ) : error ? (
         <div>Error: {error}</div>
       ) : (
