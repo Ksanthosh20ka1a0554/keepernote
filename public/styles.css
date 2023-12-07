@@ -110,6 +110,25 @@ footer p {
   color: #f5ba13;
   border: solid #f5ba13;
 }
+.log-out{
+  padding: 5px 10px 5px 10px;
+  background-color: #f5ba13;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+.top{
+  display: flex;
+  margin: auto;
+}
+.log-out:hover{
+  padding: 3px 8px 3px 8px;
+  cursor: pointer;
+  background-color: #ffff;
+  border-radius: 5px;
+  color: #f5ba13;
+  border: solid #f5ba13;
+}
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -125,4 +144,7 @@ footer p {
   border-top: 10px solid #383636; /* Black */
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
+}
+form{
+  margin: auto;
 }
