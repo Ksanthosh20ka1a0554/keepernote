@@ -21,7 +21,7 @@ function Login() {
 
     // Send login request to the server
     axios
-      .post("http://localhost:7000/login", { email, password })
+      .post("https://keepernote-server.onrender.com/login", { email, password })
       .then((response) => {
         console.log("User logged in:", response.data);
         // Perform necessary actions after successful login

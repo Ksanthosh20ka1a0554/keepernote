@@ -15,7 +15,7 @@ function NoteContainer() {
   function fetchNotes() {
     setLoading(true);
     axios
-      .get("http://localhost:7000/data")
+      .get("https://keepernote-server.onrender.com/data")
       .then((response) => {
         setNotes(response.data.notes);
         setLoading(false);
@@ -35,7 +35,7 @@ function NoteContainer() {
     };
 
     axios
-      .post("http://localhost:7000/data", newNote)
+      .post("https://keepernote-server.onrender.com/data", newNote)
       .then((response) => {
         console.log("Note added:", response.data);
         fetchNotes(); // Refresh the notes after adding a new note
@@ -50,7 +50,7 @@ function NoteContainer() {
 
   function deleteNote(noteId) {
     axios
-      .delete(`http://localhost:7000/data/${noteId}`)
+      .delete(`https://keepernote-server.onrender.com/data/${noteId}`)
       .then((response) => {
         console.log("Note deleted successfully");
         fetchNotes(); // Refresh the notes after deleting a note

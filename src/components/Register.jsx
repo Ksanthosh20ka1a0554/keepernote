@@ -21,7 +21,7 @@ function Register() {
 
     // Send registration request to the server
     axios
-      .post("http://localhost:7000/register", { email, password })
+      .post("https://keepernote-server.onrender.com/register", { email, password })
       .then((response) => {
         console.log("User registered:", response.data);
         // Perform necessary actions after successful registration
