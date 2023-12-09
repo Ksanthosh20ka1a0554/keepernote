@@ -144,6 +144,10 @@ footer p {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
-form{
+
+.login-container{
+  margin: auto;
+}
+.registration-container{
   margin: auto;
 }

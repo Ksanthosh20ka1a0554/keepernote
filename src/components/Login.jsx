@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BounceLoader } from 'react-spinners';
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -39,44 +40,55 @@ function Login() {
   }
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div className="login-container card text-center mt-5 border-warning border-4 p-2" style={{width: "20rem"}}>
+    <div className="card-body">
+      <h2 className="card-title">Login</h2>
       <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
+        <div className="form-group mt-4">
           <input
             type="email"
+            className="form-control border-warning"
             value={email}
             onChange={handleEmailChange}
+            placeholder="Email"
             required
-          />
+          /> 
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="form-group mt-4">
           <input
             type="password"
+            className="form-control border-warning"
             value={password}
             onChange={handlePasswordChange}
+            placeholder="Password"
             required
           />
         </div>
         {loading && 
         <div
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(255, 255, 255, 0.8)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh',
+          zIndex: 9999,
         }}
         >
           <BounceLoader color="#f5ba13" cssOverride={{}} size={500} />
         </div>}
         {error && <p className="error">{error}</p>}
-        <button className="log-out" type="submit">Login</button>
-        <p>
+        <button className="log-out mt-4" type="submit">Submit</button>
+        <p className="mt-4">
           New user? <Link to="/register">Register here</Link>
         </p>
       </form>
+      
+    </div>
     </div>
   );
 }

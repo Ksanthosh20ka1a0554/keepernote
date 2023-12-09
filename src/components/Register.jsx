@@ -39,44 +39,54 @@ function Register() {
   }
 
   return (
-    <div className="registration-container">
-      <h2>Registration</h2>
+    <div className="registration-container card text-center mt-5 border-warning border-4 p-2" style={{width: "20rem"}}>
+      <div className="card-body">
+      <h2 className="card-title">Registration</h2>
       <form onSubmit={handleRegistration}>
-        <div>
-          <label>Email:</label>
+        <div className="form-group mt-4">
           <input
             type="email"
+            className="form-control border-warning"
             value={email}
             onChange={handleEmailChange}
+            placeholder="Email"
             required
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="form-group mt-4">
           <input
             type="password"
+            className="form-control border-warning"
             value={password}
             onChange={handlePasswordChange}
+            placeholder="Password"
             required
           />
         </div>
         {loading && 
         <div
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(255, 255, 255, 0.8)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh',
+          zIndex: 9999,
         }}
         >
           <BounceLoader color="#f5ba13" cssOverride={{}} size={500} />
         </div>}
         {error && <p className="error">{error}</p>}
-        <button className="log-out" type="submit">Register</button>
-        <p>
+        <button className="log-out mt-4" type="submit">Submit</button>
+        <p className="mt-4">
           Already have an account? <Link to="/login">Login here</Link>
         </p>
       </form>
+      </div>
     </div>
   );
 }

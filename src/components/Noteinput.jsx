@@ -82,7 +82,22 @@ function NoteContainer() {
       </div>
 
       {loading ? (
-        <BounceLoader color="#f5ba13" />
+        <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(255, 255, 255, 0.8)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+        }}
+        >
+          <BounceLoader color="#f5ba13" cssOverride={{}} size={500} />
+        </div>
       ) : error ? (
         <div>Error: {error}</div>
       ) : (
