@@ -118,7 +118,6 @@ footer p {
   color: white;
 }
 .top{
-  display: flex;
   margin: auto;
 }
 .log-out:hover{
@@ -145,6 +144,10 @@ footer p {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
-form{
+
+.login-container{
+  margin: auto;
+}
+.registration-container{
   margin: auto;
 }
